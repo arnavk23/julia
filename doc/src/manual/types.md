@@ -1083,6 +1083,11 @@ contain `Int`s (since `T` must be at least as big as `Int`).
 The syntax `where T>:Int` also works to specify only the lower bound of a type variable,
 and `Array{>:Int}` is equivalent to `Array{T} where T>:Int`.
 
+!!! note
+    When using a single-bound `where` clause like `Vector{T} where T<:Real`, 
+    the type variable (`T`) must appear on the left-hand side of the subtype operator. 
+    Writing `Vector{Real} where Real<:T` is invalid and will not be parsed correctly.
+
 Since `where` expressions nest, type variable bounds can refer to outer type variables.
 For example `Tuple{T,Array{S}} where S<:AbstractArray{T} where T<:Real` refers to 2-tuples
 whose first element is some [`Real`](@ref), and whose second element is an `Array` of any
